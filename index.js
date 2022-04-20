@@ -24,14 +24,26 @@ app.get('/holidays', (request, response) => {
 });
 
 app.get('/is-today-holiday', (request, response) => {
-  const datas = ["1/1/2022",
-    "3/1/2022", "17/4/2022", "21/4/2022",
-    "1/5/2022", "16/6/2022", "7/9/2022",
-    "12/10/2022", "2/11/2022", "15/11/2022",
-    "25/12/2022",]
+  const holidays = [
+    { date: "1/1/2022", name: "Confraternização mundial" },
+    { date: "3/1/2022", name: "Carnaval" },
+    { date: "17/4/2022", name: "Páscoa" },
+    { date: "21/4/2022", name: "Tiradentes" },
+    { date: "1/5/2022", name: "Dia do trabalho" },
+    { date: "16/6/2022", name: "Corpus Christi" },
+    { date: "7/9/2022", name: "Independência do Brasil" },
+    { date: "12/10/2022", name: "Nossa Senhora Aparecida" },
+    { date: "2/11/2022", name: "Finados" },
+    { date: "15/11/2022", name: "Proclamação da República" },
+    { date: "25/12/2022", name: "Natal" }]
+;
+  let nome = ""
   const hoje = new Date();
-  if(datas.includes(hoje.toLocaleDateString())) response.send("Sim, hoje é feriado.")
-  else response.send("Não, hoje não é feriado.");
+  for(let i = 0; i < holidays.length; i++){
+    if(holidays[i].date.includes(hoje.toLocaleDateString())){
+      response.send(`Sim, hoje é ${holidays[i].name}.`)
+    }}
+    response.send("Não, hoje não é feriado.");
 })
 
 app.get('/holidays/:idMes', (request, response) => {
